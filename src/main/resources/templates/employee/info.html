@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Info</title>
+  <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+  <div class="m-5">
+    <h2 class="fw-bold text-center">Información</h2>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Nombre</label>
+        <input th:value="${empleado.getFirstName()}" class="form-control" id="inputEmail4" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Apellido</label>
+        <input th:value="${empleado.getLastName()}" class="form-control" id="inputPassword4" disabled>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Correo</label>
+        <input th:value="${empleado.getEmail()}" class="form-control" id="inputAddress" disabled>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Departamento</label>
+        <input th:value="${empleado.getDepartment().getDepartmentName()}" class="form-control" id="inputAddress2" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input th:value="${empleado.getDepartment().getLocation().getCity()}" class="form-control" id="inputCity" disabled>
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Trabajo</label>
+        <select id="inputState" class="form-select" disabled>
+          <option th:each="trabajo : ${trabajos}" th:value="${trabajo.getJobId()}" th:text="${trabajo.getJobTitle()}" th:selected="${trabajo.getJobId()} == ${empleado.getJob().getJobId()}"></option>
+        </select>
+      </div>
+    </form>
+    <!--Botón para retornar a la vista de lista-->
+    <div class="col-12 mt-4">
+      <a th:href="@{/employee/listar}" class="btn btn-primary">Volver</a>
+    </div>
+  </div>
+</body>
+</html>
